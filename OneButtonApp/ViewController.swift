@@ -8,18 +8,38 @@
 
 import UIKit
 
+let NumberOfTapsStorageKey = "OneButtonApp.NumerOfTaps"
+
 class ViewController: UIViewController {
+
+    fileprivate var numberOfTaps: Int = UserDefaults.standard.integer(forKey: NumberOfTapsStorageKey) {
+        didSet {
+            UserDefaults.standard.set(numberOfTaps, forKey: NumberOfTapsStorageKey)
+        }
+    }
+
+    @IBOutlet weak var numberOfTapsLabel: UILabel!
+    @IBOutlet weak var button: UIButton!
+    @IBOutlet weak var resetButton: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        updateLabel()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    fileprivate func updateLabel() {
+        numberOfTapsLabel.text = "Button was tapped \(numberOfTaps) time" + (numberOfTaps == 1 ? "" : "s")
     }
 
+    @IBAction func buttonTapped(_ sender: UIButton) {
+        numberOfTaps += 1
+        updateLabel()
+    }
+
+    @IBAction func resetButtonTapped(_ sender: UIButton) {
+        numberOfTaps = 0
+        updateLabel()
+    }
 
 }
 
