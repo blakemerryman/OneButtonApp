@@ -28,7 +28,8 @@ class ViewController: UIViewController {
     }
 
     fileprivate func updateLabel() {
-        numberOfTapsLabel.text = "Button was tapped \(numberOfTaps) time" + (numberOfTaps == 1 ? "" : "s")
+        print("Number of taps - \(numberOfTaps)")
+        numberOfTapsLabel.text = "Button was tapped \n\(numberOfTaps) time" + (numberOfTaps == 1 ? "" : "s")
     }
 
     @IBAction func buttonTapped(_ sender: UIButton) {
